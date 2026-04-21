@@ -6,9 +6,33 @@ totalIntegers({ a: 1, b: { a: [5, 10], b: 11 } }); // returns 4
 ```
 */
 
+// npm test -- totalIntegers.spec.js
 const totalIntegers = function(array) {
-    if (array.array.forea)
+    console.log("Start");
+    let counter;
+    if (Array.isArray(array)){
+        console.log("array");
+        for (let i = 0; i < array.lenth; i++){
+            counter++;
+            if (array[i].isArray || array[i] instanceof Object){
+                return totalIntegers(array[i]);
+            }
+        }
+    }else if (array instanceof Object){
+        console.log("object");
+        for (let i = 0; i < Object.values(array); i++){
+            counter++;
+            if (array[i].isArray || array[i] instanceof Object){
+                return totalIntegers(array[i]);
+            }
+        }
+    }else{
+        console.log(counter);
+        return counter;
+    }
 };
+
+console.log(totalIntegers([1, 2, 3]));
   
 // Do not edit below this line
 module.exports = totalIntegers;

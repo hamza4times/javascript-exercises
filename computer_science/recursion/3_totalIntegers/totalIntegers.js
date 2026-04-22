@@ -7,36 +7,38 @@ totalIntegers({ a: 1, b: { a: [5, 10], b: 11 } }); // returns 4
 */
 
 // npm test -- totalIntegers.spec.js
-const totalIntegers = function(array) {
-    console.log("Start");
-    let counter = 0;
+const totalIntegers = function(array, counter = 0){
+    let length = array.length;
+    // console.log("Start");
     if (Array.isArray(array)){
-        console.log("array");
-        console.log(array.length);
-        for (let i = 0; i < 3; i++){ // replace 3 with array.length
-            console.log("iteration");
+        // console.log("array path:");
+        for (let i = 0; i < length; i++){ // replace 3 with array.length
+            // console.log("iteration");
             counter++;
-            if (array[i].isArray || array[i] instanceof Object){
-                return totalIntegers(array[i]);
+            // console.log(counter);
+            if (Array.isArray(array[i]) || array[i] instanceof Object){
+                counter--;
+                return totalIntegers(array[i], counter);
             }
         }
-        console.log(array.length);
     }else if (array instanceof Object){
-        console.log("object");
+        // console.log("object path:");
         for (let i = 0; i < Object.values(array); i++){
             counter++;
-            if (array[i].isArray || array[i] instanceof Object){
+            if (Array.isArray(array[i]) || array[i] instanceof Object){
                 return totalIntegers(array[i]);
             }
         }
     }else{
-        console.log(counter);
         return counter;
     }
     return counter;
 };
 
 console.log(totalIntegers([1, 2, 3]));
+console.log(totalIntegers([1, 2, 3, [4, 5, 6, [7, 8, 9, 10]]]));
+console.log(totalIntegers([1, 2, 3, [4, 5, 6, [7, 8, 9, 10, [11, 12, 13, 14, 15]]]]));
+console.log(totalIntegers([1, 2, 3, [4, 5, 6, {a: 7, b: 8, c: 9, d: 10, e: [11, 12, 13, 14, 15]}]]));
   
 // Do not edit below this line
 module.exports = totalIntegers;

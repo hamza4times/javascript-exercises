@@ -9,15 +9,18 @@ totalIntegers({ a: 1, b: { a: [5, 10], b: 11 } }); // returns 4
 // npm test -- totalIntegers.spec.js
 const totalIntegers = function(array) {
     console.log("Start");
-    let counter;
+    let counter = 0;
     if (Array.isArray(array)){
         console.log("array");
-        for (let i = 0; i < array.lenth; i++){
+        console.log(array.length);
+        for (let i = 0; i < 3; i++){ // replace 3 with array.length
+            console.log("iteration");
             counter++;
             if (array[i].isArray || array[i] instanceof Object){
                 return totalIntegers(array[i]);
             }
         }
+        console.log(array.length);
     }else if (array instanceof Object){
         console.log("object");
         for (let i = 0; i < Object.values(array); i++){
@@ -30,6 +33,7 @@ const totalIntegers = function(array) {
         console.log(counter);
         return counter;
     }
+    return counter;
 };
 
 console.log(totalIntegers([1, 2, 3]));

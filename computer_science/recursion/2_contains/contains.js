@@ -1,24 +1,20 @@
-/*
-Write a function that searches for a value in a nested object. It returns true if the object contains that value.
-Objects are compared by reference.
-*/
-
-const contains = function(object, value) {
+const contains = function(object, value,) {
   for (let i = 0; i < Object.values(object).length; i++){
-    if (Object.values(object)[i].isArray || Object.values(object)[i] instanceof Object){ // fix Array to captial
-      console.log("return contains(Object.values(object)[i], value);");
-      console.log("Object keys: " + Object.keys(object));
+    if (Array.isArray(Object.values(object)[i]) || Object.values(object)[i] instanceof Object){
+      console.log("Object keys: " + Object.keys(object)[i]);
+      // for (let j = 0; j < Object.keys(object); j++){
+        
+      // }
       return contains(Object.values(object)[i], value);
+    }else{
+      console.log("This: !!!" + Object.values(object)[i]);
     }
   };
-  if(Object.values(object).includes(value) === false){
-    console.log("return false");
-    return false;
-  } else {
-    console.log("return Object.values(object).includes(value);");
-    return Object.values(object).includes(value);
-  }
+  return Object.values(object).includes(value);
 };
+
+
+
 
 // npm test -- contains.spec.js
 
